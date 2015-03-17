@@ -13,16 +13,12 @@ namespace config {
 
 void SDV::Load(TiXmlElement* sub) {
   assert(sub != nullptr);
-  TiXmlElement* elem = nullptr;
-  while (true) {
-    elem = sub->FirstChildElement("route");
-    if (elem && elem->GetText()) {
-      std::cout << "text: " << elem->GetText();
+  for (TiXmlNode* node = sub->FirstChild(); node; node = node->NextSibling()) {
+    TiXmlElement* elem = node->ToElement();
+    if (elem) {
       Route r;
       r.Load(elem);
       routes_.push_back(r);
-    } else {
-      break;
     }
   }
 }
@@ -53,7 +49,6 @@ void Route::Load(TiXmlElement* sub) {
 }
 
 SDV Load(const std::string& filepath) {
-
   TiXmlDocument doc(filepath.c_str());
   if (false == doc.LoadFile()) {
     throw ParseError("fail to parse xml");
