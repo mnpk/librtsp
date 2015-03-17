@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <sdvConfig>
+	<qamIp>127.0.0.1</qamIp>
+	<qamPort>2554</qamPort>
 	<route>
 		<path>/sdv/1.mpg</path>
 		<qamDestination>5500000.51</qamDestination>
+        <qamName>qam1</qamName>
 		<destination>192.0.2.11</destination>
 		<destinationPort>101</destinationPort>
 		<multicastAddress>232.1.1.1</multicastAddress>
@@ -10,6 +13,7 @@
 	<route>
 		<path>/sdv/2.mpg</path>
 		<qamDestination>5500000.52</qamDestination>
+        <qamName>qam2</qamName>
 		<destination>192.0.2.12</destination>
 		<destinationPort>102</destinationPort>
 		<multicastAddress>232.1.1.2</multicastAddress>

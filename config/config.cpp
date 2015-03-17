@@ -13,12 +13,21 @@ namespace config {
 
 void SDV::Load(TiXmlElement* sub) {
   assert(sub != nullptr);
+  TiXmlElement* elem = nullptr;
+  elem = sub->FirstChildElement("qamIp");
+  if (elem && elem->GetText()) {
+    qam_ip = elem->GetText();
+  }
+  elem = sub->FirstChildElement("qamPort");
+  if (elem && elem->GetText()) {
+    qam_port = std::stoi(elem->GetText());
+  }
   for (TiXmlNode* node = sub->FirstChild(); node; node = node->NextSibling()) {
     TiXmlElement* elem = node->ToElement();
-    if (elem) {
+    if (elem && elem->ValueStr() == "route") {
       Route r;
       r.Load(elem);
-      routes_.push_back(r);
+      routes.push_back(r);
     }
   }
 }
@@ -33,6 +42,10 @@ void Route::Load(TiXmlElement* sub) {
   elem = sub->FirstChildElement("qamDestination");
   if (elem && elem->GetText()) {
     qam_destination = elem->GetText();
+  }
+  elem = sub->FirstChildElement("qamName");
+  if (elem && elem->GetText()) {
+    qam_name = elem->GetText();
   }
   elem = sub->FirstChildElement("destination");
   if (elem && elem->GetText()) {

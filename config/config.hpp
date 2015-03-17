@@ -18,6 +18,7 @@ struct Route {
   void Load(TiXmlElement* sub);
   std::string path;
   std::string qam_destination;
+  std::string qam_name;
   std::string destination;
   std::string destination_port;
   std::string multicast_address;
@@ -25,7 +26,9 @@ struct Route {
 
 struct SDV {
   void Load(TiXmlElement* sub);
-  std::vector<Route> routes_;
+  std::vector<Route> routes;
+  std::string qam_ip = "127.0.0.1";
+  uint16_t qam_port = 554;
 };
 
 SDV Load(const std::string& filepath);
